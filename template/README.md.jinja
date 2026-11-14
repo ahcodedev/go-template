@@ -1,0 +1,23 @@
+# {{ project_name }}{% if module_path.startswith('github.com/') %} ![Go](https://{{ module_path }}/actions/workflows/go.yml/badge.svg?branch=main) ![Security](https://{{ module_path }}/actions/workflows/security.yml/badge.svg?branch=main){% endif %}
+
+{{ description }}
+
+## Setup
+
+- Install Homebrew
+- Install dependencies: `brew bundle install`
+
+## Commands
+
+- Build: `task build`
+- Run Tests: `task test`
+- Run tests with code coverage: `task coverage`
+- Lint code: `task lint`
+- Scan for secrets: `task gitleaks`
+- Audit GitHub Actions workflows: `task zizmor`
+- Run all security checks: `task security`
+- See available commands: `task --list`
+
+## Usage
+
+## Contribution Guidelines
