@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Covers this repo's workflows and the ones shipped in the template.
+  - package-ecosystem: github-actions
+    directories: ["/", "/template"]
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns: ["*"]

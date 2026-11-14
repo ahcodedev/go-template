@@ -1,0 +1,41 @@
+version: '3'
+
+tasks:
+  build:
+    desc: Build project without output
+    cmds:
+      - go build ./...
+
+  test:
+    desc: Run unit tests
+    cmds:
+      - go test ./...
+
+  coverage:
+    desc: Run unit tests with code coverage
+    cmds:
+      - go test -cover -coverprofile=coverage.out ./...
+      - go tool cover -func=coverage.out
+      - ./scripts/coverage_check.sh coverage.out 0
+
+  lint:
+    desc: Lint Go code
+    cmds:
+      - go vet ./...
+      - golangci-lint run
+
+  gitleaks:
+    desc: Scan git history for secrets
+    cmds:
+      - gitleaks git --redact --verbose .
+
+  zizmor:
+    desc: Audit GitHub Actions workflows and Dependabot config
+    cmds:
+      - zizmor .
+
+  security:
+    desc: Run all security checks
+    cmds:
+      - task: gitleaks
+      - task: zizmor

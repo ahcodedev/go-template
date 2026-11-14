@@ -1,22 +1,25 @@
-# Go Project Template ![](https://github.com/ahcodedev/go-template/actions/workflows/go.yml/badge.svg?branch=main)
+# Go Project Template ![CI](https://github.com/ahcodedev/go-template/actions/workflows/ci.yml/badge.svg?branch=main) ![Security](https://github.com/ahcodedev/go-template/actions/workflows/security.yml/badge.svg?branch=main)
 
-GoLang project template
+[Copier](https://copier.readthedocs.io) template for Go projects. Generated projects include Task, golangci-lint, coverage checks, gitleaks, zizmor and Dependabot.
 
-Your project description here
+## Create a project
 
-## Setup
+```sh
+copier copy gh:ahcodedev/go-template my-project
+```
 
-- Install Homebrew
-- Install dependencies:  `brew bundle install`
+Pull later template changes into a generated project:
 
-## Commands
+```sh
+copier update
+```
 
-- Build: `task build`
-- Run Tests: `task test`
-- Run tests with code coverage: `task coverage`
-- Lint code: `task lint`
+## Developing the template
+
+Project files live in [template/](template/). Files ending in `.jinja` are rendered with the answers from [copier.yml](copier.yml).
+
+- Install dependencies: `brew bundle install`
+- Render into `./rendered` (gitignored): `task render`
+- Build, test, coverage and lint the rendered project: `task build`, `task test`, `task coverage`, `task lint`
+- Security checks: `task gitleaks`, `task zizmor`, `task security`
 - See available commands: `task --list`
-
-## Usage
-
-## Contribution Guidelines

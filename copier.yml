@@ -1,0 +1,32 @@
+_subdirectory: template
+_min_copier_version: "9.0.0"
+# Setting _exclude replaces Copier's defaults, so they're repeated here.
+_exclude:
+  - copier.yaml
+  - copier.yml
+  - "~*"
+  - "*.py[co]"
+  - __pycache__
+  - .git
+  - .DS_Store
+  - .svn
+  - .claude/.cc-writes
+
+project_name:
+  type: str
+  help: Project name
+  default: my-project
+
+module_path:
+  type: str
+  help: Go module path (e.g. github.com/user/repo)
+  default: "github.com/user/{{ project_name }}"
+  validator: >-
+    {% if not (module_path | regex_search('^[a-z0-9.-]+(/[A-Za-z0-9._~-]+)+$')) %}
+    Must look like host/path, e.g. github.com/user/repo
+    {% endif %}
+
+description:
+  type: str
+  help: Short project description
+  default: ""

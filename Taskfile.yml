@@ -1,25 +1,51 @@
 version: '3'
 
+vars:
+  RENDER_DIR: rendered
+
 tasks:
-  build:
-    desc: Build project without output
+  render:
+    desc: Render the template with default answers into ./{{.RENDER_DIR}}
     cmds:
-      - go build ./...
+      - rm -rf {{.RENDER_DIR}}
+      - copier copy --vcs-ref=HEAD --defaults --quiet . {{.RENDER_DIR}}
+
+  build:
+    desc: Build the rendered template
+    deps: [render]
+    cmds:
+      - task -d {{.RENDER_DIR}} build
 
   test:
-    desc: Run unit tests
+    desc: Run unit tests in the rendered template
+    deps: [render]
     cmds:
-      - go test ./...
+      - task -d {{.RENDER_DIR}} test
 
   coverage:
-    desc: Run unit tests with code coverage
+    desc: Run unit tests with code coverage in the rendered template
+    deps: [render]
     cmds:
-      - go test -cover -coverprofile=coverage.out ./...
-      - go tool cover -func=coverage.out
-      - ./scripts/coverage_check.sh coverage.out 0
-  
+      - task -d {{.RENDER_DIR}} coverage
+
   lint:
-    desc: Lint Go code
+    desc: Lint the rendered template
+    deps: [render]
     cmds:
-      - go vet ./...
-      - golangci-lint run
+      - task -d {{.RENDER_DIR}} lint
+
+  gitleaks:
+    desc: Scan git history for secrets
+    cmds:
+      - gitleaks git --redact --verbose .
+
+  zizmor:
+    desc: Audit workflows and Dependabot config in the repo and the template
+    cmds:
+      - zizmor . template
+
+  security:
+    desc: Run all security checks
+    cmds:
+      - task: gitleaks
+      - task: zizmor

@@ -1,3 +1,6 @@
+brew "copier"
 brew "go"
 brew "go-task"
 brew "golangci-lint"
+brew "gitleaks"
+brew "zizmor"
