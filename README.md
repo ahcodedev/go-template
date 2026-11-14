@@ -1,4 +1,4 @@
-# Go Project Template ![CI](https://github.com/ahcodedev/go-template/actions/workflows/ci.yml/badge.svg?branch=main) ![Security](https://github.com/ahcodedev/go-template/actions/workflows/security.yml/badge.svg?branch=main)
+# Go Project Template ![CI](https://github.com/ahcodedev/go-template/actions/workflows/ci.yml/badge.svg?branch=main) ![Security](https://github.com/ahcodedev/go-template/actions/workflows/security.yml/badge.svg?branch=main) [![gitleaks](https://img.shields.io/badge/protected%20by-gitleaks-blue)](https://github.com/gitleaks/gitleaks) [![zizmor](https://img.shields.io/badge/%F0%9F%8C%88-zizmor-white?labelColor=white)](https://github.com/zizmorcore/zizmor)
 
 [Copier](https://copier.readthedocs.io) template for Go projects. Generated projects include Task, golangci-lint, coverage checks, gitleaks, zizmor and Dependabot.
 
