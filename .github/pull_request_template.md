@@ -8,3 +8,4 @@
 - [ ] `task security` passes
 - [ ] New template questions added to `copier.yml` with sensible defaults
 - [ ] README updated if usage changed
+- [ ] Release label added
