@@ -8,6 +8,8 @@
 copier copy gh:ahcodedev/go-template my-project
 ```
 
+Copier uses the latest release tag. Pass `--vcs-ref vX.Y.Z` to pick a specific version.
+
 Pull later template changes into a generated project:
 
 ```sh
@@ -23,3 +25,23 @@ Project files live in [template/](template/). Files ending in `.jinja` are rende
 - Build, test, coverage and lint the rendered project: `task build`, `task test`, `task coverage`, `task lint`
 - Security checks: `task gitleaks`, `task zizmor`, `task security`
 - See available commands: `task --list`
+
+## Releases
+
+Releases are managed with [Release Drafter](https://github.com/release-drafter/release-drafter), which reads the
+**release labels** on merged pull requests. Commit messages and PR titles aren't parsed.
+
+| Release label                                              | Version bump | Release notes section |
+| ---------------------------------------------------------- | ------------ | --------------------- |
+| `breaking`                                                 | major        | Breaking Changes      |
+| `feature`, `enhancement`                                   | minor        | Features              |
+| `bug`, `fix`                                               | patch        | Bug Fixes             |
+| `chore`, `ci`, `dependencies`, `documentation`, `refactor` | patch        | Maintenance           |
+| `skip-changelog`                                           | none         | Excluded              |
+
+- Every PR needs at least one release label, or the `Release Drafter / require-label` check fails
+  - Labels are added automatically from the branch name prefix (`feat/`, `fix/`, `chore/`, `ci/`, `docs/`,
+    `refactor/`, `dependabot/`) and from the files a PR changes
+- Merging to `main` updates a draft GitHub Release with the next version and notes
+- To release, run the **Release** workflow from the Actions tab. It publishes the draft and tags the commit `vX.Y.Z`,
+  which Copier uses as the template version
